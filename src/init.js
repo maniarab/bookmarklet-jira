@@ -26,6 +26,6 @@
     ].map(loadStylesheet)))
   };
 
-  console.log("Loading bookmarklet...");
+  console.log("Loading script and css...");
   await loadResources();
 })();
