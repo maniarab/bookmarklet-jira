@@ -8,53 +8,46 @@ import {
 } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-/*
-Component that allows you to select engineer names
-*/
-
 const SwimlaneSelector = () => {
-  console.log('executing SwimlaneSelector')
-  const [$, set$] = useState(null);
   const [swimlanes, setSwimlanes] = useState([]);
   const [engToSwimlaneMap, setEngToSwimlaneMap] = useState({});
   const [selectedEngineers, setSelectedEngineers] = useState(['All']);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const buildEngToSwimlaneMap = useCallback(() => {
-    if ($) {
-      const map = {};
-      swimlanes.forEach((swimlane) => {
-        const ariaLabel = $(swimlane).attr('aria-label');
-        if (ariaLabel) {
-          const parts = ariaLabel.split(':');
-          if (parts.length > 1) {
-            const engineerName = parts[1].trim();
-            map[engineerName] = swimlane;
-          }
+    const map = {};
+    swimlanes.forEach((swimlane) => {
+      const ariaLabel = swimlane.getAttribute('aria-label');
+      if (ariaLabel) {
+        const parts = ariaLabel.split(':');
+        if (parts.length > 1) {
+          const engineerName = parts[1].trim();
+          map[engineerName] = swimlane;
         }
-      });
-      setEngToSwimlaneMap(map);
-    }
-  }, [$, swimlanes]);
+      }
+    });
+    setEngToSwimlaneMap(map);
+  }, [swimlanes]);
 
   const hideJiraFilters = useCallback(() => {
-    if ($) {
-      $('#ghx-operations').hide();
+    const operationsElement = document.getElementById('ghx-operations');
+    if (operationsElement) {
+      operationsElement.style.display = 'none';
     }
-  }, [$]);
+  }, []);
 
   const hideAllSwimlanes = useCallback(() => {
-    if ($) {
-      $('.ghx-swimlane').hide();
-    }
-  }, [$]);
+    swimlanes.forEach((swimlane) => {
+      swimlane.style.display = 'none';
+    });
+  }, [swimlanes]);
 
   const showSwimlane = useCallback((engineerName) => {
     hideAllSwimlanes();
-    if ($ && engToSwimlaneMap[engineerName]) {
-      $(engToSwimlaneMap[engineerName]).show();
+    if (engToSwimlaneMap[engineerName]) {
+      engToSwimlaneMap[engineerName].style.display = '';
     }
-  }, [$, engToSwimlaneMap, hideAllSwimlanes]);
+  }, [engToSwimlaneMap, hideAllSwimlanes]);
 
   const handleCheckboxChange = useCallback((engineerName) => {
     setSelectedEngineers((prevSelected) => {
@@ -80,19 +73,9 @@ const SwimlaneSelector = () => {
   };
 
   useEffect(() => {
-    if (typeof window.jQuery !== 'undefined') {
-      set$(window.jQuery);
-    } else {
-      console.error('jQuery is not available. This component requires jQuery to function.');
-    }
+    const collectedSwimlanes = Array.from(document.querySelectorAll('.ghx-swimlane'));
+    setSwimlanes(collectedSwimlanes);
   }, []);
-
-  useEffect(() => {
-    if ($) {
-      const collectedSwimlanes = $('.ghx-swimlane').toArray();
-      setSwimlanes(collectedSwimlanes);
-    }
-  }, [$]);
 
   useEffect(() => {
     if (swimlanes.length > 0) {
@@ -101,10 +84,6 @@ const SwimlaneSelector = () => {
       hideAllSwimlanes();
     }
   }, [swimlanes, buildEngToSwimlaneMap, hideJiraFilters, hideAllSwimlanes]);
-
-  if (!$) {
-    return '';
-  }
 
   const engineerNames = Object.keys(engToSwimlaneMap);
 
