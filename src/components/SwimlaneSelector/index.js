@@ -8,7 +8,12 @@ import {
 } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
+/*
+Component that allows you to select engineer names
+*/
+
 const SwimlaneSelector = () => {
+  console.log('executing SwimlaneSelector')
   const [$, set$] = useState(null);
   const [swimlanes, setSwimlanes] = useState([]);
   const [engToSwimlaneMap, setEngToSwimlaneMap] = useState({});
