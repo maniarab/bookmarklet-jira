@@ -15,8 +15,8 @@
   };
   
 
-  // const initUrl = "https://cdn.jsdelivr.net/gh/maniarab/bookmarklet-jira@main/src/init.js";
-  const initUrl = "https://cdn.jsdelivr.net/gh/maniarab/bookmarklet-jira@main/build/static/js/init.js";
+  const initUrl = "https://cdn.jsdelivr.net/gh/maniarab/bookmarklet-jira@latest/src/init.js";
+  // const initUrl = "https://cdn.jsdelivr.net/gh/maniarab/bookmarklet-jira@main/build/static/js/init.js";
 
   const loadResources = async () => {
     return Promise.all([
