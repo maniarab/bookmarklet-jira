@@ -18,6 +18,7 @@
     });
   };
 
+
   const loadResources = async () => {
     return Promise.all([
       "https://cdn.jsdelivr.net/gh/maniarab/bookmarklet-jira@main/build/static/js/main.71e4cfc2.js",
@@ -26,6 +27,6 @@
     ].map(loadStylesheet)))
   };
 
-  console.log("Loading script and css...");
+  console.log("Loading javascript and css...");
   await loadResources();
 })();
