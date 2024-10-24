@@ -20,9 +20,9 @@
 
   const loadResources = async () => {
     return Promise.all([
-      "https://cdn.jsdelivr.net/gh/maniarab/bookmarklet-jira@main/build/static/js/main.js"
+      "https://cdn.jsdelivr.net/gh/maniarab/bookmarklet-jira@main/build/static/js/*.js*"
     ].map(loadScript).concat([
-      "https://cdn.jsdelivr.net/gh/maniarab/bookmarklet-jira@main/build/static/css/main.css"
+      "https://cdn.jsdelivr.net/gh/maniarab/bookmarklet-jira@main/build/static/css/*.css*"
     ].map(loadStylesheet)))
   };
 
