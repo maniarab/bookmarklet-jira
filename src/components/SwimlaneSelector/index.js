@@ -5,8 +5,8 @@ import {
   FormControlLabel,
   Menu,
   MenuItem
-} from '@material-ui/core';
-import { ArrowDropDown } from '@material-ui/icons';
+} from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const SwimlaneSelector = () => {
   const [$, set$] = useState(null);
@@ -110,7 +110,7 @@ const SwimlaneSelector = () => {
           variant="contained"
           color="primary"
           onClick={handleMenuClick}
-          endIcon={<ArrowDropDown />}
+          endIcon={<ArrowDropDownIcon />}
         >
           Engineers
         </Button>
